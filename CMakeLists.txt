@@ -18,6 +18,11 @@ project(
 # Definitions
 #============
 
+add_library(
+	${PROJECT_NAME}
+	./source/cavis.cpp
+)
+
 # SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 find_package(SFML 2 REQUIRED network audio graphics window system)
@@ -40,6 +45,7 @@ if (BUILD_TESTING)
 	target_link_libraries(
 		test_${PROJECT_NAME}
 		PRIVATE
+			${PROJECT_NAME}
 			${SFML_LIBRARIES}
 			${SFML_DEPENDENCIES}
 	)

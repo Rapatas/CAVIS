@@ -1,5 +1,8 @@
 #include <SFML/Graphics.hpp>
 
+#include "../include/cavis.h"
+#include "testable_ca.h"
+
 using namespace sf;
 
 int main() {
@@ -10,6 +13,9 @@ int main() {
 
 	RenderWindow window(VideoMode(width, height), "Test CAVIS");
 	window.setVerticalSyncEnabled(true);
+
+	TestableCA t(width, height);
+	Cavis c(&t);
 
 	while (window.isOpen()) {
 
@@ -24,6 +30,8 @@ int main() {
 		}
 
 		window.clear();
+		c.update();
+		window.draw(c);
 		window.display();
 	}
 
