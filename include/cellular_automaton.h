@@ -14,8 +14,6 @@ public:
 
 	virtual unsigned get_width() = 0;
 	virtual unsigned get_height() = 0;
-	virtual void set_width(unsigned new_width) = 0;
-	virtual void get_height(unsigned new_height) = 0;
 };
 
 #endif // CELLULAR_AUTOMATON
