@@ -11,6 +11,7 @@ class Cavis : public sf::Drawable, public sf::Transformable {
 
 	unsigned width;
 	unsigned height;
+	float steps_per_sec = 100;
 
 	uint8_t *pixels;
 	sf::Texture t;
@@ -25,8 +26,7 @@ public:
 
 	void set_pixel(unsigned i, const sf::Color &color);
 
-	void update();
-	void step(unsigned iterations = 1);
+	void update(double dt);
 };
 
 #endif // CAVIS_H

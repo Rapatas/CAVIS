@@ -1,6 +1,5 @@
 #include "../include/cavis.h"
 
-
 void Cavis::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	states.transform *= getTransform();
 	target.draw(s, states);
@@ -42,7 +41,15 @@ void Cavis::set_pixel(unsigned i, const sf::Color &color) {
 	pixels[i + 3] = color.a;
 }
 
-void Cavis::update() {
+void Cavis::update(double dt) {
+
+	static double accumulator = 0;
+	accumulator += dt;
+
+	while (accumulator > 1 / steps_per_sec) {
+		automaton->step();
+		accumulator -= 1 / steps_per_sec;
+	}
 
 	for (unsigned i = 0; i != width * height; ++i) {
 		set_pixel(i, automaton->get_pixel(i));
@@ -52,9 +59,3 @@ void Cavis::update() {
 	s.setTexture(t);
 }
 
-void Cavis::step(unsigned iterations) {
-
-	for (unsigned i = 0; i != iterations; ++i) {
-		automaton->step();
-	}
-}

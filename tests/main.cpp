@@ -13,6 +13,7 @@ int main() {
 
 	RenderWindow window(VideoMode(width, height), "Test CAVIS");
 	window.setVerticalSyncEnabled(true);
+	sf::Clock clock;
 
 	LangtonsAntModel t(width, height, 3);
 	Cavis c(&t);
@@ -29,9 +30,10 @@ int main() {
 			}
 		}
 
+		double dt = clock.restart().asSeconds();
+
 		window.clear();
-		c.step();
-		c.update();
+		c.update(dt);
 		window.draw(c);
 		window.display();
 	}
