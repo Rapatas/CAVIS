@@ -1,20 +1,20 @@
 #include <SFML/Graphics.hpp>
 
 #include "../include/cavis.h"
-#include "testable_ca.h"
+#include "langtons_ant.h"
 
 using namespace sf;
 
 int main() {
 
-	// HD aspect ration = 16:9
+	// HD aspect ratio = 16:9
 	unsigned height = 360;
 	unsigned width = height * 16 / 9;
 
 	RenderWindow window(VideoMode(width, height), "Test CAVIS");
 	window.setVerticalSyncEnabled(true);
 
-	TestableCA t(width, height);
+	LangtonsAntModel t(width, height, 3);
 	Cavis c(&t);
 
 	while (window.isOpen()) {
@@ -30,6 +30,7 @@ int main() {
 		}
 
 		window.clear();
+		c.step();
 		c.update();
 		window.draw(c);
 		window.display();

@@ -26,7 +26,7 @@ public:
 	void set_pixel(unsigned i, const sf::Color &color);
 
 	void update();
-	void step(unsigned iterations);
+	void step(unsigned iterations = 1);
 };
 
 #endif // CAVIS_H
