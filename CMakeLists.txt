@@ -25,11 +25,13 @@ find_package(SFML 2 REQUIRED network audio graphics window system)
 add_library(
 	${PROJECT_NAME}
 	./source/cavis.cpp
+	./source/pixels.cpp
 )
 
 set(
 	${PROJECT_NAME}_headers
 	./include/cavis.h
+	./include/pixels.h
 	./include/cellular_automaton.h
 )
 

@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "cellular_automaton.h"
+#include "pixels.h"
 
 class Cavis : public sf::Drawable, public sf::Transformable {
 
@@ -11,20 +12,15 @@ class Cavis : public sf::Drawable, public sf::Transformable {
 
 	unsigned width;
 	unsigned height;
-	float steps_per_sec = 100;
+	float steps_per_sec = 300;
 
-	uint8_t *pixels;
-	sf::Texture t;
-	sf::Sprite s;
+	Pixels pixels;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 public:
 
 	Cavis(CellularAutomaton *automaton);
-	Cavis(CellularAutomaton *automaton, unsigned width, unsigned height);
-
-	void set_pixel(unsigned i, const sf::Color &color);
 
 	void update(double dt);
 };
