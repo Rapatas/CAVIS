@@ -29,3 +29,12 @@ void Cavis::update(double dt) {
 	pixels.update();
 }
 
+void Cavis::handle_user() {
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && steps_per_sec < 999) {
+		++steps_per_sec;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && steps_per_sec > 0) {
+		--steps_per_sec;
+	}
+}

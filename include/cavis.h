@@ -12,7 +12,7 @@ class Cavis : public sf::Drawable, public sf::Transformable {
 
 	unsigned width;
 	unsigned height;
-	float steps_per_sec = 300;
+	float steps_per_sec = 1;
 
 	Pixels pixels;
 
@@ -23,6 +23,8 @@ public:
 	Cavis(CellularAutomaton *automaton);
 
 	void update(double dt);
+
+	void handle_user();
 };
 
 #endif // CAVIS_H

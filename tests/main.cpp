@@ -33,6 +33,7 @@ int main() {
 		double dt = clock.restart().asSeconds();
 
 		window.clear();
+		c.handle_user();
 		c.update(dt);
 		window.draw(c);
 		window.display();
