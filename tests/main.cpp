@@ -32,6 +32,11 @@ int main() {
 			) {
 				window.close();
 			}
+			if (event.type == Event::KeyPressed) {
+				if (event.key.code == Keyboard::G) {
+					c.show_grid = !(c.show_grid);
+				}
+			}
 		}
 
 		double dt = clock.restart().asSeconds();
