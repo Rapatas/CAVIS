@@ -26,12 +26,14 @@ add_library(
 	${PROJECT_NAME}
 	./source/cavis.cpp
 	./source/pixels.cpp
+	./source/grid.cpp
 )
 
 set(
 	${PROJECT_NAME}_headers
 	./include/cavis.h
 	./include/pixels.h
+	./include/grid.h
 	./include/cellular_automaton.h
 )
 
