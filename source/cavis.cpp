@@ -16,7 +16,7 @@ Cavis::Cavis(CellularAutomaton *automaton) :
 	width(automaton->get_width()),
 	height(automaton->get_height()),
 	pixels(width, height),
-	show_grid(false)
+	show_grid(true)
 {}
 
 void Cavis::update(double dt) {

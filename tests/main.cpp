@@ -8,7 +8,7 @@ using namespace sf;
 int main() {
 
 	// HD aspect ratio = 16:9
-	unsigned height = 360;
+	unsigned height = 100;
 	unsigned width = height * 16 / 9;
 
 	RenderWindow window(VideoMode(width, height), "Test CAVIS");
@@ -17,6 +17,8 @@ int main() {
 
 	LangtonsAntModel t(width, height, 3);
 	Cavis c(&t);
+	c.add_grid(1, Color(100,100,100,255));
+	c.add_grid(5, Color(200,200,200,255));
 
 	while (window.isOpen()) {
 
