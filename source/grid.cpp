@@ -26,12 +26,12 @@ Grid::Grid(unsigned width, unsigned height, unsigned size, sf::Color color) :
 {
 	vertices.setPrimitiveType(sf::Lines);
 
-	for (unsigned i = 0; i != height / size; ++i) {
+	for (unsigned i = 0; i < height / size + 0.5; ++i) {
 		add_horizontal(i * size, color);
 	}
 	add_horizontal(height, color);
 
-	for (unsigned i = 0; i != width / size; ++i) {
+	for (unsigned i = 0; i < width / size + 0.5; ++i) {
 		add_vertical(i * size, color);
 	}
 	add_vertical(width, color);
