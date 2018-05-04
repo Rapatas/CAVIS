@@ -3,13 +3,20 @@
 void Cavis::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	states.transform *= getTransform();
 	target.draw(pixels, states);
+
+	if (show_grid) {
+		for (const auto &g : grids) {
+			target.draw(g, states);
+		}
+	}
 }
 
 Cavis::Cavis(CellularAutomaton *automaton) :
 	automaton(automaton),
 	width(automaton->get_width()),
 	height(automaton->get_height()),
-	pixels(width, height)
+	pixels(width, height),
+	show_grid(false)
 {}
 
 void Cavis::update(double dt) {
@@ -37,4 +44,9 @@ void Cavis::handle_user() {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && steps_per_sec > 0) {
 		--steps_per_sec;
 	}
+}
+
+void Cavis::add_grid(unsigned size, sf::Color color) {
+
+	grids.emplace_back(width, height, size, color);
 }
