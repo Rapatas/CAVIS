@@ -14,6 +14,7 @@ class Cavis : public sf::Drawable, public sf::Transformable {
 
 	unsigned width;
 	unsigned height;
+	unsigned pixel_size;
 	float steps_per_sec = 1;
 
 	Pixels pixels;
@@ -23,7 +24,7 @@ class Cavis : public sf::Drawable, public sf::Transformable {
 
 public:
 
-	Cavis(CellularAutomaton *automaton);
+	Cavis(CellularAutomaton *automaton, unsigned pixel_size = 5);
 
 	bool show_grid;
 

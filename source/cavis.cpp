@@ -11,13 +11,16 @@ void Cavis::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	}
 }
 
-Cavis::Cavis(CellularAutomaton *automaton) :
+Cavis::Cavis(CellularAutomaton *automaton, unsigned pixel_size) :
 	automaton(automaton),
 	width(automaton->get_width()),
 	height(automaton->get_height()),
+	pixel_size(pixel_size),
 	pixels(width, height),
 	show_grid(true)
-{}
+{
+	pixels.scale(pixel_size, pixel_size);
+}
 
 void Cavis::update(double dt) {
 
@@ -49,4 +52,9 @@ void Cavis::handle_user() {
 void Cavis::add_grid(unsigned size, sf::Color color) {
 
 	grids.emplace_back(width, height, size, color);
+
+	for (auto &g : grids) {
+		g.setScale(pixel_size, pixel_size);
+	}
 }
+
