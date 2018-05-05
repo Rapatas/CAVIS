@@ -12,8 +12,8 @@ public:
 	virtual void step() = 0;
 	virtual sf::Color get_pixel(unsigned i) = 0;
 
-	virtual unsigned get_width() = 0;
-	virtual unsigned get_height() = 0;
+	virtual sf::Vector2u get_dimentions() = 0;
+	virtual void set_dimentions(sf::Vector2u dim) = 0;
 };
 
 #endif // CELLULAR_AUTOMATON

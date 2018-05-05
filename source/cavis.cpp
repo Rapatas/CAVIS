@@ -13,8 +13,8 @@ void Cavis::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
 Cavis::Cavis(CellularAutomaton *automaton, unsigned pixel_size) :
 	automaton(automaton),
-	width(automaton->get_width()),
-	height(automaton->get_height()),
+	width(automaton->get_dimentions().x),
+	height(automaton->get_dimentions().y),
 	pixel_size(pixel_size),
 	pixels(width, height),
 	show_grid(true)

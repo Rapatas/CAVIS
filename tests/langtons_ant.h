@@ -167,12 +167,26 @@ public:
 		state = next_state;
 	}
 
-	unsigned get_height() {
-		return height;
+	sf::Vector2u get_dimentions() {
+		return {width, height};
 	}
 
-	unsigned get_width() {
-		return width;
+	void set_dimentions(sf::Vector2u dim) {
+
+		width = dim.x;
+		height = dim.y;
+
+		distribution_x = uniform_int_distribution<unsigned>(0, width - 1);
+		distribution_y = uniform_int_distribution<unsigned>(0, height - 1);
+
+		state = flat_matrix<bool>(width, height);
+		next_state = flat_matrix<bool>(width, height);
+		initialize_states();
+
+		ants.clear();
+		for (unsigned i = 0; i != num_of_ants; ++i) {
+			place_ant_rand();
+		}
 	}
 
 	sf::Color get_pixel(unsigned i) {
