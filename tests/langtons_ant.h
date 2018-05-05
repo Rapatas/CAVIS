@@ -1,5 +1,5 @@
-#ifndef BOARD_MODEL_H
-#define BOARD_MODEL_H
+#ifndef LANGTONS_ANT_H
+#define LANGTONS_ANT_H
 
 #include <vector>
 #include <random>
@@ -11,8 +11,7 @@
 
 using namespace std;
 
-
-class LangtonsAntModel : public CellularAutomaton {
+class LangtonsAnt : public CellularAutomaton {
 
 private:
 
@@ -100,8 +99,8 @@ private:
 		}
 	};
 
-	unsigned height;
 	unsigned width;
+	unsigned height;
 	flat_matrix<bool> state;
 	flat_matrix<bool> next_state;
 	unsigned num_of_ants;
@@ -111,32 +110,39 @@ private:
 	uniform_int_distribution<unsigned> distribution_x;
 	uniform_int_distribution<unsigned> distribution_y;
 
-public:
+	void initialize_states() {
 
-	LangtonsAntModel(unsigned x, unsigned y, unsigned num_of_ants) :
-		height(y),
-		width(x),
-		state(flat_matrix<bool>(x, y)),
-		next_state(flat_matrix<bool>(x, y)),
-		num_of_ants(num_of_ants)
-	{
-		generator.seed(random_device()());
-		distribution_x = uniform_int_distribution<unsigned>(0, width - 1);
-		distribution_y = uniform_int_distribution<unsigned>(0, height - 1);
-
-		// Init state
-		for (unsigned i = 0; i < x * y; ++i) {
+		for (unsigned i = 0; i != width * height; ++i) {
 			state[i] = false;
 			next_state[i] = false;
 		}
+	}
 
-		// Place ants randomly
+	void place_ant_rand() {
+
+		unsigned x_pos = distribution_x(generator);
+		unsigned y_pos = distribution_y(generator);
+
+		ants.push_back({x_pos, y_pos});
+	}
+
+public:
+
+	LangtonsAnt(unsigned width, unsigned height, unsigned num_of_ants) :
+		width(width),
+		height(height),
+		state(flat_matrix<bool>(width, height)),
+		next_state(flat_matrix<bool>(width, height)),
+		num_of_ants(num_of_ants),
+		distribution_x(uniform_int_distribution<unsigned>(0, width - 1)),
+		distribution_y(uniform_int_distribution<unsigned>(0, height - 1))
+	{
+		generator.seed(random_device()());
+
+		initialize_states();
+
 		for (unsigned i = 0; i != num_of_ants; ++i) {
-
-			unsigned x_pos = distribution_x(generator);
-			unsigned y_pos = distribution_y(generator);
-
-			ants.push_back({x_pos, y_pos});
+			place_ant_rand();
 		}
 	}
 
@@ -174,8 +180,6 @@ public:
 			? sf::Color::Cyan
 			: sf::Color::Black;
 	}
-
 };
 
-
-#endif // BOARD_MODEL_H
+#endif // LANGTONS_ANT_H

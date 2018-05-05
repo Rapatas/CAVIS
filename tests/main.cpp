@@ -16,7 +16,7 @@ int main() {
 	window.setVerticalSyncEnabled(true);
 	sf::Clock clock;
 
-	LangtonsAntModel t(width, height, 3);
+	LangtonsAnt t(width, height, 3);
 	Cavis c(&t, pixel_size);
 	c.add_grid(1, Color(50,50,50,255));
 	c.add_grid(5, Color(100,100,100,255));
