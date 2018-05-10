@@ -12,9 +12,16 @@ int main() {
 	unsigned width = height * 16 / 9;
 	unsigned pixel_size = 4;
 
-	RenderWindow window(VideoMode(width * pixel_size, height * pixel_size), "Test CAVIS");
+	unsigned window_width = width * pixel_size;
+	unsigned window_height = height * pixel_size;
+
+	RenderWindow window(VideoMode(window_width, window_height), "Test CAVIS");
 	window.setVerticalSyncEnabled(true);
 	sf::Clock clock;
+
+	View view(Vector2f(window_width / 2, window_height / 2), Vector2f(window_width, window_height));
+	float view_speed = 30;
+	float view_zoom = 1.01;
 
 	LangtonsAnt t(width, height, 3);
 	Cavis c(&t, pixel_size);
@@ -36,10 +43,35 @@ int main() {
 				if (event.key.code == Keyboard::G) {
 					c.show_grid = !(c.show_grid);
 				}
+				if (event.key.code == Keyboard::R) {
+					view.setSize(Vector2f(window_width, window_height));
+					view.setCenter(Vector2f(window_width / 2, window_height / 2));
+				}
 			}
 		}
 
 		double dt = clock.restart().asSeconds();
+
+		if (Keyboard::isKeyPressed(Keyboard::W)) {
+			view.move(0, -dt * view_speed);
+		}
+		if (Keyboard::isKeyPressed(Keyboard::S)) {
+			view.move(0, dt * view_speed);
+		}
+		if (Keyboard::isKeyPressed(Keyboard::A)) {
+			view.move(-dt * view_speed, 0);
+		}
+		if (Keyboard::isKeyPressed(Keyboard::D)) {
+			view.move(dt * view_speed, 0);
+		}
+		if (Keyboard::isKeyPressed(Keyboard::LShift)) {
+			view.zoom(1 / view_zoom);
+		}
+		if (Keyboard::isKeyPressed(Keyboard::Space)) {
+			view.zoom(view_zoom);
+		}
+
+		window.setView(view);
 
 		window.clear();
 		c.handle_user();
