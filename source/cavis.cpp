@@ -36,6 +36,12 @@ void Cavis::update(double dt) {
 		pixels.set_pixel(i, automaton->get_pixel(i));
 	}
 
+	std::vector<Agent> agents = automaton->get_agents();
+
+	for (auto agent : agents) {
+		pixels.set_pixel(agent.x + (width * agent.y), agent.color);
+	}
+
 	pixels.update();
 }
 

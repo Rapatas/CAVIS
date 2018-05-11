@@ -20,7 +20,7 @@ int main() {
 	sf::Clock clock;
 
 	View view(Vector2f(window_width / 2, window_height / 2), Vector2f(window_width, window_height));
-	float view_speed = 30;
+	float view_speed = 50;
 	float view_zoom = 1.01;
 
 	LangtonsAnt t(width, height, 3);

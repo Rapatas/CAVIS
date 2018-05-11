@@ -194,6 +194,17 @@ public:
 			? sf::Color::Cyan
 			: sf::Color::Black;
 	}
+
+	std::vector<Agent> get_agents() {
+
+		std::vector<Agent> agents;
+
+		for (const auto &ant : ants) {
+			agents.emplace_back(ant.x, ant.y, sf::Color(255,0,0));
+		}
+
+		return agents;
+	}
 };
 
 #endif // LANGTONS_ANT_H
