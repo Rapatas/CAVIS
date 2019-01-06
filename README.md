@@ -1,13 +1,12 @@
 # CAVIS
 Cellular Automaton View in SFML
 
-# Langtons Ant
+# Use case: Langtons Ant
 ![Preview](https://i.imgur.com/3lk8FZU.png "Langtons Ant")
 
-# Usage
+### Usage
 - Implement a cellular automaton using the provided interface.
 - Pass it as an argument to the Cavis constructor.
-- Drop it in your project.
 
 ```c++
 LangtonsAntModel t(width, height, 3);
