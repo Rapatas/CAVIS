@@ -34,6 +34,7 @@ set(
 	./include/cavis.h
 	./include/pixels.h
 	./include/grid.h
+	./include/agent.h
 	./include/cellular_automaton.h
 )
 
