@@ -52,36 +52,6 @@ target_link_libraries(
 		${SFML_DEPENDENCIES}
 )
 
-# =======
-# Testing
-# =======
-
-# run "cmake .. && make && make test"
-# OR  "cmake .. && make && ctest"
-
-include(CTest)
-if (BUILD_TESTING)
-
-	add_executable(
-		test_${PROJECT_NAME}
-		./tests/main.cpp
-	)
-
-	target_link_libraries(
-		test_${PROJECT_NAME}
-		PRIVATE
-			${PROJECT_NAME}
-			${SFML_LIBRARIES}
-			${SFML_DEPENDENCIES}
-	)
-
-	add_test(
-		NAME test_${PROJECT_NAME}
-		COMMAND test_${PROJECT_NAME}
-	)
-
-endif()
-
 # =========
 # Packaging
 # =========
