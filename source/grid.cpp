@@ -6,13 +6,13 @@ void Grid::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(vertices, states);
 }
 
-void Grid::add_horizontal(unsigned y, sf::Color color) {
+void Grid::add_horizontal(unsigned y) {
 
 	vertices.append(sf::Vertex(sf::Vector2f(0, y), color));
 	vertices.append(sf::Vertex(sf::Vector2f(width, y), color));
 }
 
-void Grid::add_vertical(unsigned x, sf::Color color) {
+void Grid::add_vertical(unsigned x) {
 
 	vertices.append(sf::Vertex(sf::Vector2f(x, 0), color));
 	vertices.append(sf::Vertex(sf::Vector2f(x, height), color));
@@ -27,13 +27,13 @@ Grid::Grid(unsigned width, unsigned height, unsigned size, sf::Color color) :
 	vertices.setPrimitiveType(sf::Lines);
 
 	for (unsigned i = 0; i < height / size + 0.5; ++i) {
-		add_horizontal(i * size, color);
+		add_horizontal(i * size);
 	}
-	add_horizontal(height, color);
+	add_horizontal(height);
 
 	for (unsigned i = 0; i < width / size + 0.5; ++i) {
-		add_vertical(i * size, color);
+		add_vertical(i * size);
 	}
-	add_vertical(width, color);
+	add_vertical(width);
 }
 

@@ -9,13 +9,14 @@ class Grid : public sf::Drawable, public sf::Transformable {
 	unsigned height;
 	unsigned size;
 
+	sf::Color color;
 	sf::VertexArray vertices;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	void add_horizontal(unsigned y, sf::Color color);
+	void add_horizontal(unsigned y);
 
-	void add_vertical(unsigned x, sf::Color color);
+	void add_vertical(unsigned x);
 
 public:
 
