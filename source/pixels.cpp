@@ -5,16 +5,24 @@ void Pixels::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(s, states);
 }
 
-Pixels::Pixels(unsigned width, unsigned height) :
-	width(width),
-	height(height)
-{
+void Pixels::design_pixels() {
+
 	t.create(width, height);
+
+	if (pixels != nullptr) { delete [] pixels; }
 	pixels = new uint8_t[width * height * 4];
 
 	for (unsigned i = 0; i != width * height; ++i) {
 		set_pixel(i, sf::Color::Black);
 	}
+}
+
+Pixels::Pixels(unsigned width, unsigned height) :
+	width(width),
+	height(height),
+	pixels(nullptr)
+{
+	design_pixels();
 }
 
 Pixels::~Pixels() {
@@ -37,3 +45,10 @@ void Pixels::update() {
 	s.setTexture(t);
 }
 
+void Pixels::set_dimentions(sf::Vector2u dim) {
+
+	width = dim.x;
+	height = dim.y;
+
+	design_pixels();
+}

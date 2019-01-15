@@ -14,6 +14,8 @@ class Pixels : public sf::Drawable, public sf::Transformable {
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+	void design_pixels();
+
 public:
 
 	Pixels(unsigned width, unsigned height);
@@ -22,6 +24,8 @@ public:
 	void set_pixel(unsigned i, const sf::Color &color);
 
 	void update();
+
+	void set_dimentions(sf::Vector2u dim);
 };
 
 #endif // PIXELS_H
