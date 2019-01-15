@@ -18,13 +18,9 @@ void Grid::add_vertical(unsigned x) {
 	vertices.append(sf::Vertex(sf::Vector2f(x, height), color));
 }
 
+void Grid::design_grid() {
 
-Grid::Grid(unsigned width, unsigned height, unsigned size, sf::Color color) :
-	width(width),
-	height(height),
-	size(size)
-{
-	vertices.setPrimitiveType(sf::Lines);
+	vertices.clear();
 
 	for (unsigned i = 0; i < height / size + 0.5; ++i) {
 		add_horizontal(i * size);
@@ -37,3 +33,26 @@ Grid::Grid(unsigned width, unsigned height, unsigned size, sf::Color color) :
 	add_vertical(width);
 }
 
+
+Grid::Grid(
+	unsigned width,
+	unsigned height,
+	unsigned size,
+	sf::Color color
+) :
+	width(width),
+	height(height),
+	size(size),
+	color(color)
+{
+	vertices.setPrimitiveType(sf::Lines);
+	design_grid();
+}
+
+void Grid::set_dimentions(sf::Vector2u dim) {
+
+	width  = dim.x;
+	height = dim.y;
+
+	design_grid();
+}

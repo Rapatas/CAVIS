@@ -18,9 +18,13 @@ class Grid : public sf::Drawable, public sf::Transformable {
 
 	void add_vertical(unsigned x);
 
+	void design_grid();
+
 public:
 
 	Grid(unsigned width, unsigned height, unsigned size, sf::Color color);
+
+	void set_dimentions(sf::Vector2u dim);
 };
 
 #endif // GRID_H
