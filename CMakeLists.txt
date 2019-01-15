@@ -10,7 +10,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 project(
 	CAVIS
-	VERSION 0.0.0
+	VERSION 0.0.1
 	LANGUAGES CXX
 )
 
@@ -20,7 +20,7 @@ project(
 
 # SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules" ${CMAKE_MODULE_PATH})
-find_package(SFML 2 REQUIRED network audio graphics window system)
+find_package(SFML 2 REQUIRED graphics window system)
 
 add_library(
 	${PROJECT_NAME}
