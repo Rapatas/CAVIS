@@ -24,7 +24,6 @@ find_package(SFML 2 REQUIRED network audio graphics window system)
 
 add_library(
 	${PROJECT_NAME}
-	./source/cavis.cpp
 	./source/pixels.cpp
 	./source/grid.cpp
 )
