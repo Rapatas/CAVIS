@@ -1,6 +1,7 @@
 #include "../include/cavis.h"
 
 void Cavis::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+
 	states.transform *= getTransform();
 	target.draw(pixels, states);
 
@@ -11,15 +12,21 @@ void Cavis::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	}
 }
 
-Cavis::Cavis(CellularAutomaton *automaton, unsigned pixel_size) :
+Cavis::Cavis(
+	CellularAutomaton *automaton,
+	unsigned width,
+	unsigned height,
+	unsigned pixel_size
+) :
 	automaton(automaton),
-	width(automaton->get_dimentions().x),
-	height(automaton->get_dimentions().y),
+	width(width),
+	height(height),
 	pixel_size(pixel_size),
-	pixels(width, height),
-	show_grid(true)
+	show_grid(true),
+	pixels({width, height})
 {
 	pixels.scale(pixel_size, pixel_size);
+	automaton->set_dimentions({width, height});
 }
 
 void Cavis::update(double dt) {
@@ -64,3 +71,16 @@ void Cavis::add_grid(unsigned size, sf::Color color) {
 	}
 }
 
+void Cavis::set_dimentions(sf::Vector2u dim) {
+
+	width  = dim.x;
+	height = dim.y;
+
+	automaton->set_dimentions({width, height});
+
+	pixels.set_dimentions({width, height});
+
+	for (auto &g : grids) {
+		g.set_dimentions({width, height});
+	}
+}
