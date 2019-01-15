@@ -34,6 +34,7 @@ set(
 	./include/pixels.h
 	./include/grid.h
 	./include/agent.h
+	./include/window.h
 	./include/cellular_automaton.h
 )
 
