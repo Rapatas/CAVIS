@@ -71,6 +71,7 @@ public:
 						sf::Vector2f(window_width / 2, window_height / 2)
 					);
 				}
+				cavis.handle_events(event);
 			}
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {

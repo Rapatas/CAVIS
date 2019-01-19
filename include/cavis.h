@@ -75,6 +75,10 @@ public:
 		pixels.update();
 	}
 
+	void handle_events(sf::Event event) {
+
+	}
+
 	void handle_user() {
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && steps_per_sec < 999) {
