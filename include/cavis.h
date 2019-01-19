@@ -77,6 +77,12 @@ public:
 
 	void handle_events(sf::Event event) {
 
+		if (event.type == sf::Event::KeyPressed) {
+
+			if (event.key.code == sf::Keyboard::G) {
+				show_grid = !show_grid;
+			}
+		}
 	}
 
 	void handle_user() {
