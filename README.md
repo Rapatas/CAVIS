@@ -1,19 +1,21 @@
 # CAVIS (Cellular Automaton View in SFML)
-CAVIS provides a simple way of displaying your cellular automaton. It comes in two flavors: Window and Widget. Use the Widget to display the automaton on your own projects. Alternatively use Window to take advantage of its built-in features:
+CAVIS provides a simple way of displaying your cellular automaton. It comes in two flavors: Window and Widget. Use the Widget to display the automaton on your own projects. Alternatively use the Window and get started fast!
+
+# Features:
 * Move the view with WASD
-* Control the zoom with SHIFT & SPACE
-* Control the speed up with UP & DOWN ARROWS
+* Control zoom with SHIFT & SPACE
+* Control steps per second up with UP & DOWN ARROWS
 
 
 # Use cases: 
 
 ### [Langton's Ant](https://github.com/Rapatas/langtons_ant_sfml)
 
-![Preview](https://i.imgur.com/3lk8FZU.png "Langtons Ant")
+[![Preview](https://i.imgur.com/3lk8FZU.png "Langtons Ant")](https://github.com/Rapatas/langtons_ant_sfml)
 
 ### [Predator & Prey](https://github.com/Rapatas/predator_and_prey_sfml)
 
-![Preview](https://i.imgur.com/QzlzzWK.png "Preditor & Prey")
+[![Preview](https://i.imgur.com/QzlzzWK.png "Preditor & Prey")](https://github.com/Rapatas/predator_and_prey_sfml)
 
 ### Usage
 - Implement a cellular automaton using the provided interface.
