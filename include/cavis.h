@@ -105,6 +105,14 @@ public:
 				sf::Vector2f(view_width / 2, view_height / 2)
 			);
 		}
+
+		if (event.type == sf::Event::Resized) {
+
+			view_width = event.size.width;
+			view_height = event.size.height;
+
+			view.setSize(view_width, view_height);
+		}
 	}
 
 	void handle_user(double dt) {
