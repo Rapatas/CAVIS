@@ -22,9 +22,18 @@ class Cavis : public sf::Drawable, public sf::Transformable {
 
 	Automaton automaton;
 
+	unsigned view_width;
+	unsigned view_height;
+	float view_speed = 50;
+	float view_zoom  = 1.01;
+	sf::View view;
+
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
 		states.transform *= getTransform();
+
+		target.setView(view);
+
 		target.draw(pixels, states);
 
 		if (show_grid) {
@@ -46,7 +55,13 @@ public:
 		pixel_size(pixel_size),
 		show_grid(true),
 		pixels({width, height}),
-		automaton(sf::Vector2u(width, height))
+		automaton(sf::Vector2u(width, height)),
+		view_width(width * pixel_size),
+		view_height(height * pixel_size),
+		view(
+			{view_width / 2.0f, view_height / 2.0f},
+			{view_width, view_height}
+		)
 	{
 		pixels.scale(pixel_size, pixel_size);
 		automaton.set_dimentions({width, height});
@@ -83,9 +98,16 @@ public:
 				show_grid = !show_grid;
 			}
 		}
+
+		if (event.key.code == sf::Keyboard::R) {
+			view.setSize(sf::Vector2f(view_width, view_height));
+			view.setCenter(
+				sf::Vector2f(view_width / 2, view_height / 2)
+			);
+		}
 	}
 
-	void handle_user() {
+	void handle_user(double dt) {
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && steps_per_sec < 999) {
 			++steps_per_sec;
@@ -93,6 +115,26 @@ public:
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && steps_per_sec > 0) {
 			--steps_per_sec;
 		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+			view.move(0, -dt * view_speed);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+			view.move(0, dt * view_speed);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+			view.move(-dt * view_speed, 0);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+			view.move(dt * view_speed, 0);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+			view.zoom(1 / view_zoom);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+			view.zoom(view_zoom);
+		}
+
 	}
 
 	void add_grid(unsigned size, sf::Color color) {
