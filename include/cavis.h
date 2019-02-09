@@ -109,10 +109,16 @@ public:
 
 	void handle_user(double dt) {
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && steps_per_sec < 999) {
+		if (
+			sf::Keyboard::isKeyPressed(sf::Keyboard::Up)
+			&& steps_per_sec < 1999
+		) {
 			++steps_per_sec;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && steps_per_sec > 0) {
+		if (
+			sf::Keyboard::isKeyPressed(sf::Keyboard::Down)
+			&& steps_per_sec > 0
+		) {
 			--steps_per_sec;
 		}
 
@@ -134,7 +140,6 @@ public:
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 			view.zoom(view_zoom);
 		}
-
 	}
 
 	void add_grid(unsigned size, sf::Color color) {
