@@ -8,7 +8,6 @@
 #include "pixels.h"
 #include "grid.h"
 
-template <class Automaton>
 class Cavis : public sf::Drawable, public sf::Transformable {
 
 	unsigned width;
@@ -20,7 +19,7 @@ class Cavis : public sf::Drawable, public sf::Transformable {
 	Pixels pixels;
 	std::vector<Grid> grids;
 
-	Automaton automaton;
+	CellularAutomaton *automaton;
 
 	unsigned view_width;
 	unsigned view_height;
@@ -46,6 +45,7 @@ class Cavis : public sf::Drawable, public sf::Transformable {
 public:
 
 	Cavis(
+		CellularAutomaton *automaton,
 		unsigned width,
 		unsigned height,
 		unsigned pixel_size = 5
@@ -55,16 +55,16 @@ public:
 		pixel_size(pixel_size),
 		show_grid(true),
 		pixels({width, height}),
-		automaton(sf::Vector2u(width, height)),
+		automaton(automaton),
 		view_width(width * pixel_size),
 		view_height(height * pixel_size),
 		view(
 			{view_width / 2.0f, view_height / 2.0f},
-			{view_width, view_height}
+			{(float) view_width, (float) view_height}
 		)
 	{
 		pixels.scale(pixel_size, pixel_size);
-		automaton.set_dimentions({width, height});
+		automaton->set_dimentions({width, height});
 	}
 
 	void update(double dt) {
@@ -73,15 +73,15 @@ public:
 		accumulator += dt;
 
 		while (accumulator > 1 / steps_per_sec) {
-			automaton.step();
+			automaton->step();
 			accumulator -= 1 / steps_per_sec;
 		}
 
 		for (unsigned i = 0; i != width * height; ++i) {
-			pixels.set_pixel(i, automaton.get_pixel(i));
+			pixels.set_pixel(i, automaton->get_pixel(i));
 		}
 
-		std::vector<Agent> agents = automaton.get_agents();
+		std::vector<Agent> agents = automaton->get_agents();
 
 		for (auto agent : agents) {
 			pixels.set_pixel(agent.x + (width * agent.y), agent.color);
@@ -164,7 +164,7 @@ public:
 		width  = dim.x;
 		height = dim.y;
 
-		automaton.set_dimentions({width, height});
+		automaton->set_dimentions({width, height});
 
 		pixels.set_dimentions({width, height});
 

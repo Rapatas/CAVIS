@@ -5,7 +5,6 @@
 #include "cavis.h"
 #include "cellular_automaton.h"
 
-template <class CellularAutomaton>
 class Window {
 
 	sf::Clock clock;
@@ -13,7 +12,7 @@ class Window {
 	unsigned width;
 	unsigned height;
 	unsigned pixel_size;
-	Cavis<CellularAutomaton> cavis;
+	Cavis cavis;
 
 	unsigned window_width;
 	unsigned window_height;
@@ -24,6 +23,7 @@ class Window {
 public:
 
 	Window(
+		CellularAutomaton *automaton,
 		unsigned width,
 		unsigned height,
 		unsigned pixel_size,
@@ -32,7 +32,7 @@ public:
 		width(width),
 		height(height),
 		pixel_size(pixel_size),
-		cavis(width, height, pixel_size),
+		cavis(automaton, width, height, pixel_size),
 		window_width(width * pixel_size),
 		window_height(height * pixel_size),
 		window_name(window_name),
