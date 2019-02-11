@@ -25,6 +25,8 @@ find_package(SFML 2 REQUIRED graphics window system)
 add_library(
 	${PROJECT_NAME}
 	./source/pixels.cpp
+	./source/window.cpp
+	./source/cavis.cpp
 	./source/grid.cpp
 )
 
