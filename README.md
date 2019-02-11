@@ -31,9 +31,13 @@ int main() {
 	unsigned height = 100;
 	unsigned width = height * 16 / 9;
 	unsigned pixel_size = 4;
+	
+	auto pp = new PredatorAndPrey;
 
-	Window<PredatorAndPrey> window(width, height, pixel_size, "Predator & Prey");
+	Window window(pp, width, height, pixel_size, "Predator & Prey");
 	window.run();
+	
+	delete pp;
 
 	return 0;
 }
