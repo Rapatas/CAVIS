@@ -19,7 +19,8 @@ CAVIS provides a simple way of displaying your cellular automaton. It comes in t
 
 ### Usage
 - Implement a cellular automaton using the provided interface.
-- Pass it as a template argument to the Cavis or Window constructor.
+- Initialize it.
+- Pass it as a pointer to the Cavis or Window constructor.
 
 ```c++
 #include <CAVIS/window.h>
