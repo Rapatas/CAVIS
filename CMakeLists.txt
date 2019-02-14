@@ -1,12 +1,4 @@
-
 cmake_minimum_required(VERSION 3.0)
-
-# Required for YCM to work
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
 project(
 	CAVIS
@@ -14,16 +6,26 @@ project(
 	LANGUAGES CXX
 )
 
-# ===========
-# Definitions
-#============
+# Dependencies {{{
+
+set(
+	CMAKE_MODULE_PATH
+		"${CMAKE_SOURCE_DIR}/cmake/modules"
+		${CMAKE_MODULE_PATH}
+)
 
 # SFML
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules" ${CMAKE_MODULE_PATH})
-find_package(SFML 2 REQUIRED graphics window system)
+find_package(
+	SFML 2 REQUIRED
+	graphics window system
+)
 
-add_library(
-	${PROJECT_NAME}
+# }}}
+
+# Definitions {{{
+
+set(
+	${PROJECT_NAME}_src
 	./src/pixels.cpp
 	./src/window.cpp
 	./src/cavis.cpp
@@ -40,6 +42,14 @@ set(
 	./include/cellular_automaton.h
 )
 
+add_library(
+	${PROJECT_NAME}
+	./src/pixels.cpp
+	./src/window.cpp
+	./src/cavis.cpp
+	./src/grid.cpp
+)
+
 set_target_properties(
 	${PROJECT_NAME}
 	PROPERTIES
@@ -53,10 +63,9 @@ target_link_libraries(
 		${SFML_LIBRARIES}
 		${SFML_DEPENDENCIES}
 )
+# }}}
 
-# =========
-# Packaging
-# =========
+# Packaging {{{
 
 include(CMakePackageConfigHelpers)
 
@@ -99,3 +108,5 @@ install(
 	NAMESPACE   ${PROJECT_NAME}::
 	DESTINATION ${destination}
 )
+# }}}
+
