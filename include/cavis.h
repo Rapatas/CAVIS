@@ -2,6 +2,7 @@
 #define CAVIS_H
 
 #include <vector>
+#include <memory>
 #include <SFML/Graphics.hpp>
 
 #include "cellular_automaton.h"
@@ -19,7 +20,7 @@ class Cavis : public sf::Drawable, public sf::Transformable {
 	Pixels pixels;
 	std::vector<Grid> grids;
 
-	CellularAutomaton *automaton;
+	std::unique_ptr<CellularAutomaton> automaton;
 
 	unsigned view_width;
 	unsigned view_height;
@@ -32,7 +33,7 @@ class Cavis : public sf::Drawable, public sf::Transformable {
 public:
 
 	Cavis(
-		CellularAutomaton *automaton,
+		std::unique_ptr<CellularAutomaton> automaton,
 		unsigned width,
 		unsigned height,
 		unsigned pixel_size = 5

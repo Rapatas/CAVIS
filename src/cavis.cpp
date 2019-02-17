@@ -17,7 +17,7 @@ void Cavis::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
 
 Cavis::Cavis(
-	CellularAutomaton *automaton,
+	std::unique_ptr<CellularAutomaton> arg_automaton,
 	unsigned width,
 	unsigned height,
 	unsigned pixel_size
@@ -27,7 +27,7 @@ Cavis::Cavis(
 	pixel_size(pixel_size),
 	show_grid(true),
 	pixels({width, height}),
-	automaton(automaton),
+	automaton(std::move(arg_automaton)),
 	view_width(width * pixel_size),
 	view_height(height * pixel_size),
 	view(

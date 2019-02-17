@@ -1,7 +1,7 @@
 #include "../include/window.h"
 
 Window::Window(
-	CellularAutomaton *automaton,
+	std::unique_ptr<CellularAutomaton> automaton,
 	unsigned width,
 	unsigned height,
 	unsigned pixel_size,
@@ -10,7 +10,7 @@ Window::Window(
 	width(width),
 	height(height),
 	pixel_size(pixel_size),
-	cavis(automaton, width, height, pixel_size),
+	cavis(std::move(automaton), width, height, pixel_size),
 	window_width(width * pixel_size),
 	window_height(height * pixel_size),
 	window_name(window_name),

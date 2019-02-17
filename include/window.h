@@ -19,11 +19,10 @@ class Window {
 	std::string window_name;
 	sf::RenderWindow window;
 
-
 public:
 
 	Window(
-		CellularAutomaton *automaton,
+		std::unique_ptr<CellularAutomaton> automaton,
 		unsigned width,
 		unsigned height,
 		unsigned pixel_size,
