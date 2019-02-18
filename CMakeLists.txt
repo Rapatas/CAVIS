@@ -44,10 +44,7 @@ set(
 
 add_library(
 	${PROJECT_NAME}
-	./src/pixels.cpp
-	./src/window.cpp
-	./src/cavis.cpp
-	./src/grid.cpp
+	${${PROJECT_NAME}_src}
 )
 
 set_target_properties(
