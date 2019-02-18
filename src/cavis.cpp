@@ -26,16 +26,15 @@ Cavis::Cavis(
 	height(height),
 	pixel_size(pixel_size),
 	show_grid(true),
-	pixels({width, height}),
 	automaton(std::move(arg_automaton)),
 	view_width(width * pixel_size),
 	view_height(height * pixel_size),
+	pixels(width, height, pixel_size),
 	view(
 		{view_width / 2.0f, view_height / 2.0f},
 		{(float) view_width, (float) view_height}
 	)
 {
-	pixels.scale(pixel_size, pixel_size);
 	automaton->set_dimentions({width, height});
 }
 

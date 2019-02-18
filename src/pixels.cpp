@@ -17,12 +17,13 @@ void Pixels::design_pixels() {
 	}
 }
 
-Pixels::Pixels(unsigned width, unsigned height) :
+Pixels::Pixels(unsigned width, unsigned height, unsigned pixel_size) :
 	width(width),
 	height(height),
 	pixels(nullptr)
 {
 	design_pixels();
+	setScale(pixel_size, pixel_size);
 }
 
 Pixels::~Pixels() {

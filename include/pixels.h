@@ -18,7 +18,7 @@ class Pixels : public sf::Drawable, public sf::Transformable {
 
 public:
 
-	Pixels(unsigned width, unsigned height);
+	Pixels(unsigned width, unsigned height, unsigned pixel_size);
 	~Pixels();
 
 	void set_pixel(unsigned i, const sf::Color &color);
