@@ -11,21 +11,20 @@
 
 class Cavis : public sf::Drawable, public sf::Transformable {
 
+	float steps_per_sec = 5;
+	float view_speed    = 100;
+	float view_zoom     = 1.01;
+	bool show_grid      = true;
+
 	unsigned width;
 	unsigned height;
 	unsigned pixel_size;
-	float steps_per_sec = 1;
-	bool show_grid;
+	unsigned view_width;
+	unsigned view_height;
 
 	Pixels pixels;
 	std::vector<Grid> grids;
-
 	std::unique_ptr<CellularAutomaton> automaton;
-
-	unsigned view_width;
-	unsigned view_height;
-	float view_speed = 50;
-	float view_zoom  = 1.01;
 	sf::View view;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;

@@ -15,7 +15,6 @@ void Cavis::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	}
 }
 
-
 Cavis::Cavis(
 	std::unique_ptr<CellularAutomaton> arg_automaton,
 	unsigned width,
@@ -25,11 +24,10 @@ Cavis::Cavis(
 	width(width),
 	height(height),
 	pixel_size(pixel_size),
-	show_grid(true),
-	automaton(std::move(arg_automaton)),
 	view_width(width * pixel_size),
 	view_height(height * pixel_size),
 	pixels(width, height, pixel_size),
+	automaton(std::move(arg_automaton)),
 	view(
 		{view_width / 2.0f, view_height / 2.0f},
 		{(float) view_width, (float) view_height}
@@ -90,7 +88,7 @@ void Cavis::handle_user(double dt) {
 
 	if (
 		sf::Keyboard::isKeyPressed(sf::Keyboard::Up)
-		&& steps_per_sec < 1999
+		&& steps_per_sec < 2000
 	) {
 		++steps_per_sec;
 	}
