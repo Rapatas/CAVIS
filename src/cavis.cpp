@@ -124,11 +124,7 @@ void Cavis::handle_user(double dt) {
 
 void Cavis::add_grid(unsigned size, sf::Color color) {
 
-	grids.emplace_back(width, height, size, color);
-
-	for (auto &g : grids) {
-		g.setScale(pixel_size, pixel_size);
-	}
+	grids.emplace_back(width, height, size, color, pixel_size);
 }
 
 void Cavis::set_dimentions(sf::Vector2u dim) {

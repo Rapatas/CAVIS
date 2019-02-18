@@ -22,7 +22,13 @@ class Grid : public sf::Drawable, public sf::Transformable {
 
 public:
 
-	Grid(unsigned width, unsigned height, unsigned size, sf::Color color);
+	Grid(
+		unsigned width,
+		unsigned height,
+		unsigned size,
+		sf::Color color,
+		unsigned pixel_size
+	);
 
 	void set_dimentions(sf::Vector2u dim);
 };
