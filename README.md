@@ -19,8 +19,7 @@ CAVIS provides a simple way of displaying your cellular automaton. It comes in t
 
 ### Usage
 - Implement a cellular automaton using the provided interface.
-- Initialize it.
-- Pass it as a pointer to the Cavis or Window constructor.
+- Pass it as a unique_ptr to the Cavis or Window constructor.
 
 ```c++
 #include <CAVIS/window.h>
@@ -33,13 +32,9 @@ int main() {
 	unsigned width = height * 16 / 9;
 	unsigned pixel_size = 4;
 	
-	auto pp = new PredatorAndPrey;
-
-	Window window(pp, width, height, pixel_size, "Predator & Prey");
+	Window window(std::make_unique<PredatorAndPrey>(), width, height, pixel_size, "Predator & Prey");
 	window.run();
 	
-	delete pp;
-
 	return 0;
 }
 ```
