@@ -3,11 +3,12 @@ CAVIS provides a simple way of displaying your cellular automaton. It comes in t
 
 # Features:
 * Move the view with WASD
+* Reset view with R
 * Control zoom with SHIFT & SPACE
 * Control steps per second up with UP & DOWN ARROWS
 
 
-# Use cases: 
+# Use cases:
 
 ### [Langton's Ant](https://github.com/Rapatas/langtons_ant_sfml)
 
@@ -31,10 +32,10 @@ int main() {
 	unsigned height = 100;
 	unsigned width = height * 16 / 9;
 	unsigned pixel_size = 4;
-	
+
 	Window window(std::make_unique<PredatorAndPrey>(), width, height, pixel_size, "Predator & Prey");
 	window.run();
-	
+
 	return 0;
 }
 ```

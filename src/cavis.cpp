@@ -24,13 +24,13 @@ Cavis::Cavis(
 	width(width),
 	height(height),
 	pixel_size(pixel_size),
-	view_width(width * pixel_size),
-	view_height(height * pixel_size),
+	view_original_dimentions(width * pixel_size, height * pixel_size),
+	view_dimentions(view_original_dimentions),
 	pixels(width, height, pixel_size),
 	automaton(std::move(arg_automaton)),
 	view(
-		{view_width / 2.0f, view_height / 2.0f},
-		{(float) view_width, (float) view_height}
+		{view_dimentions.x / 2.0f, view_dimentions.y / 2.0f},
+		{(float) view_dimentions.x, (float) view_dimentions.y}
 	)
 {
 	automaton->set_dimentions({width, height});
@@ -69,18 +69,21 @@ void Cavis::handle_events(sf::Event event) {
 	}
 
 	if (event.key.code == sf::Keyboard::R) {
-		view.setSize(sf::Vector2f(view_width, view_height));
+		view.setSize(sf::Vector2f(view_dimentions.x, view_dimentions.y));
 		view.setCenter(
-			sf::Vector2f(view_width / 2, view_height / 2)
+			sf::Vector2f(
+				view_original_dimentions.x / 2,
+				view_original_dimentions.y / 2
+			)
 		);
 	}
 
 	if (event.type == sf::Event::Resized) {
 
-		view_width = event.size.width;
-		view_height = event.size.height;
+		view_dimentions.x = event.size.width;
+		view_dimentions.y = event.size.height;
 
-		view.setSize(view_width, view_height);
+		view.setSize(view_dimentions.x, view_dimentions.y);
 	}
 }
 

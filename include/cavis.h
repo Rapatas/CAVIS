@@ -19,8 +19,8 @@ class Cavis : public sf::Drawable, public sf::Transformable {
 	unsigned width;
 	unsigned height;
 	unsigned pixel_size;
-	unsigned view_width;
-	unsigned view_height;
+	sf::Vector2u view_original_dimentions;
+	sf::Vector2u view_dimentions;
 
 	Pixels pixels;
 	std::vector<Grid> grids;
