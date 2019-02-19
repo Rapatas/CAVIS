@@ -26,8 +26,7 @@ public:
 		unsigned width,
 		unsigned height,
 		unsigned size,
-		sf::Color color,
-		unsigned pixel_size
+		sf::Color color
 	);
 
 	void set_dimentions(sf::Vector2u dim);

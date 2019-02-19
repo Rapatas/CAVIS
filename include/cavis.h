@@ -16,16 +16,13 @@ class Cavis : public sf::Drawable, public sf::Transformable {
 	float view_zoom     = 1.01;
 	bool show_grid      = true;
 
-	unsigned width;
-	unsigned height;
-	unsigned pixel_size;
-	sf::Vector2u view_original_dimentions;
-	sf::Vector2u view_dimentions;
-
-	Pixels pixels;
-	std::vector<Grid> grids;
 	std::unique_ptr<CellularAutomaton> automaton;
+	sf::Vector2u dimentions;
+	unsigned cell_size;
+	sf::Vector2f view_dimentions;
+	Pixels pixels;
 	sf::View view;
+	std::vector<Grid> grids;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

@@ -7,17 +7,12 @@
 
 class Window {
 
-	sf::Clock clock;
-
-	unsigned width;
-	unsigned height;
-	unsigned pixel_size;
+	sf::Vector2u dimentions;
+	unsigned cell_size;
 	Cavis cavis;
-
-	unsigned window_width;
-	unsigned window_height;
 	std::string window_name;
 	sf::RenderWindow window;
+	sf::Clock clock;
 
 public:
 

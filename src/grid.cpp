@@ -38,8 +38,7 @@ Grid::Grid(
 	unsigned width,
 	unsigned height,
 	unsigned size,
-	sf::Color color,
-	unsigned pixel_size
+	sf::Color color
 ) :
 	width(width),
 	height(height),
@@ -48,7 +47,6 @@ Grid::Grid(
 {
 	vertices.setPrimitiveType(sf::Lines);
 	design_grid();
-	setScale(pixel_size, pixel_size);
 }
 
 void Grid::set_dimentions(sf::Vector2u dim) {

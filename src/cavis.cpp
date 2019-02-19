@@ -19,21 +19,20 @@ Cavis::Cavis(
 	std::unique_ptr<CellularAutomaton> arg_automaton,
 	unsigned width,
 	unsigned height,
-	unsigned pixel_size
+	unsigned cell_size
 ) :
-	width(width),
-	height(height),
-	pixel_size(pixel_size),
-	view_original_dimentions(width * pixel_size, height * pixel_size),
-	view_dimentions(view_original_dimentions),
-	pixels(width, height, pixel_size),
 	automaton(std::move(arg_automaton)),
+	dimentions(width, height),
+	cell_size(cell_size),
+	view_dimentions(width * cell_size, height * cell_size),
+	pixels(width, height),
 	view(
 		{view_dimentions.x / 2.0f, view_dimentions.y / 2.0f},
-		{(float) view_dimentions.x, (float) view_dimentions.y}
+		{view_dimentions.x, view_dimentions.y}
 	)
 {
 	automaton->set_dimentions({width, height});
+	setScale(cell_size, cell_size);
 }
 
 void Cavis::update(double dt) {
@@ -46,14 +45,14 @@ void Cavis::update(double dt) {
 		accumulator -= 1 / steps_per_sec;
 	}
 
-	for (unsigned i = 0; i != width * height; ++i) {
+	for (unsigned i = 0; i != dimentions.x * dimentions.y; ++i) {
 		pixels.set_pixel(i, automaton->get_pixel(i));
 	}
 
 	std::vector<Agent> agents = automaton->get_agents();
 
 	for (auto agent : agents) {
-		pixels.set_pixel(agent.x + (width * agent.y), agent.color);
+		pixels.set_pixel(agent.x + (dimentions.x * agent.y), agent.color);
 	}
 
 	pixels.update();
@@ -66,16 +65,17 @@ void Cavis::handle_events(sf::Event event) {
 		if (event.key.code == sf::Keyboard::G) {
 			show_grid = !show_grid;
 		}
-	}
 
-	if (event.key.code == sf::Keyboard::R) {
-		view.setSize(sf::Vector2f(view_dimentions.x, view_dimentions.y));
-		view.setCenter(
-			sf::Vector2f(
-				view_original_dimentions.x / 2,
-				view_original_dimentions.y / 2
-			)
-		);
+		if (event.key.code == sf::Keyboard::R) {
+
+			view.setSize(sf::Vector2f(view_dimentions.x, view_dimentions.y));
+			view.setCenter(
+				sf::Vector2f(
+					dimentions.x * cell_size / 2,
+					dimentions.y * cell_size / 2
+				)
+			);
+		}
 	}
 
 	if (event.type == sf::Event::Resized) {
@@ -124,20 +124,19 @@ void Cavis::handle_user(double dt) {
 
 void Cavis::add_grid(unsigned size, sf::Color color) {
 
-	grids.emplace_back(width, height, size, color, pixel_size);
+	grids.emplace_back(dimentions.x, dimentions.y, size, color);
 }
 
-void Cavis::set_dimentions(sf::Vector2u dim) {
+void Cavis::set_dimentions(sf::Vector2u new_dimentions) {
 
-	width  = dim.x;
-	height = dim.y;
+	dimentions = new_dimentions;
 
-	automaton->set_dimentions({width, height});
+	automaton->set_dimentions(dimentions);
 
-	pixels.set_dimentions({width, height});
+	pixels.set_dimentions(dimentions);
 
 	for (auto &g : grids) {
-		g.set_dimentions({width, height});
+		g.set_dimentions(dimentions);
 	}
 }
 
