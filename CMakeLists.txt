@@ -15,7 +15,7 @@ list(APPEND CMAKE_MODULE_PATH
 # SFML
 find_package(
 	SFML 2 REQUIRED
-	graphics window system
+	window system
 )
 
 # }}}
@@ -42,14 +42,8 @@ set(
 
 add_library(
 	${PROJECT_NAME}
+	STATIC
 	${${PROJECT_NAME}_src}
-)
-
-set_target_properties(
-	${PROJECT_NAME}
-	PROPERTIES
-		PUBLIC_HEADER
-			"${${PROJECT_NAME}_headers}"
 )
 
 target_link_libraries(
@@ -60,16 +54,23 @@ target_link_libraries(
 )
 # }}}
 
+# Install {{{
+
+set(destination lib/cmake/${PROJECT_NAME})
+
 # Packaging {{{
 
 include(CMakePackageConfigHelpers)
 
-set(destination lib/cmake/${PROJECT_NAME})
-
 write_basic_package_version_file(
 	"${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
 	VERSION ${PROJECT_VERSION}
-	COMPATIBILITY AnyNewerVersion
+	COMPATIBILITY ExactVersion
+)
+
+install(
+	FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+	DESTINATION ${destination}
 )
 
 configure_package_config_file(
@@ -79,22 +80,21 @@ configure_package_config_file(
 )
 
 install(
-	FILES
-		"${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
-		"${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+	FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
 	DESTINATION ${destination}
 )
 
+# }}}
+
 install(
-	TARGETS       ${PROJECT_NAME}
-	EXPORT        ${PROJECT_NAME}Targets
+	FILES ${${PROJECT_NAME}_headers}
+	DESTINATION include
+)
 
-	LIBRARY       DESTINATION lib                     COMPONENT Runtime
-	RUNTIME       DESTINATION bin                     COMPONENT Runtime
-	BUNDLE        DESTINATION bin                     COMPONENT Runtime
-
-	ARCHIVE       DESTINATION lib                     COMPONENT Development
-	PUBLIC_HEADER DESTINATION include/${PROJECT_NAME} COMPONENT Development
+install(
+	TARGETS ${PROJECT_NAME}
+	EXPORT  ${PROJECT_NAME}Targets
+	ARCHIVE DESTINATION lib COMPONENT Development
 )
 
 install(
@@ -104,4 +104,3 @@ install(
 	DESTINATION ${destination}
 )
 # }}}
-
