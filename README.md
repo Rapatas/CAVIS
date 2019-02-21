@@ -1,26 +1,52 @@
 # CAVIS (Cellular Automaton View in SFML)
 CAVIS provides a simple way of displaying your cellular automaton. It comes in two flavors: Window and Widget. Use the Widget to display the automaton on your own projects. Alternatively use the Window and get started fast!
 
-# Features:
-* Move the view with WASD
-* Reset view with R
-* Control zoom with SHIFT & SPACE
-* Control steps per second up with UP & DOWN ARROWS
+# Contents
+- [Features](#features)
+- [Use cases](#use-cases)
+    - [Langton's Ant](#langtons-ant)
+    - [Predator & Prey](#predator--prey)
+- [Installation](#installation)
+    - [Dependencies](#dependencies)
+    - [CAVIS (Linux)](#cavis-linux)
+- [Usage](#usage)
 
+# Features:
+* Move the view with WASD.
+* Reset view with R.
+* Control zoom with LShift & Space.
+* Control steps per second up with Up & Down arrows.
 
 # Use cases:
 
 ### [Langton's Ant](https://github.com/Rapatas/langtons_ant_sfml)
 
-[![Preview](https://i.imgur.com/3lk8FZU.png "Langtons Ant")](https://github.com/Rapatas/langtons_ant_sfml)
+[![Preview](https://i.imgur.com/ScZSJzd.png "Langtons Ant")](https://github.com/Rapatas/langtons_ant_sfml)
 
 ### [Predator & Prey](https://github.com/Rapatas/predator_and_prey_sfml)
 
-[![Preview](https://i.imgur.com/QzlzzWK.png "Preditor & Prey")](https://github.com/Rapatas/predator_and_prey_sfml)
+[![Preview](https://i.imgur.com/GTNNQHa.png "Preditor & Prey")](https://github.com/Rapatas/predator_and_prey_sfml)
 
-### Usage
-- Implement a cellular automaton using the provided interface.
-- Pass it as a unique_ptr to the Cavis or Window constructor.
+# Installation
+## Dependencies
+CAVIS is based on [SFML (Simple & Fast Multimedia Library)](https://www.sfml-dev.org/index.php). Follow SFML's documentation to install it. 
+
+For Ubuntu just ```apt install libsfml-dev```
+
+## CAVIS (Linux)
+```bash
+git clone https://github.com/Rapatas/CAVIS.git
+cd CAVIS
+mkdir build
+cd build
+cmake ..
+make install # As root
+```
+
+# Usage
+- Implement a cellular automaton using the provided interface ([cellular_automaton.h](include/cellular_automaton.h)).
+- Pass it as a std::unique_ptr to the Cavis or Window constructor.
+- Call .run()
 
 ```c++
 #include <CAVIS/window.h>
@@ -28,14 +54,21 @@ CAVIS provides a simple way of displaying your cellular automaton. It comes in t
 
 int main() {
 
-	// HD aspect ratio = 16:9
-	unsigned height = 100;
-	unsigned width = height * 16 / 9;
-	unsigned pixel_size = 4;
+    // HD aspect ratio = 16:9
+    unsigned height = 100;
+    unsigned width = height * 16 / 9;
+    unsigned cell_size = 4;
 
-	Window window(std::make_unique<PredatorAndPrey>(), width, height, pixel_size, "Predator & Prey");
-	window.run();
+    Window window(
+        std::make_unique<PredatorAndPrey>(), 
+        width, 
+        height, 
+        cell_size, 
+        "Predator & Prey"
+    );
 
-	return 0;
+    window.run();
+
+    return 0;
 }
 ```
