@@ -16,29 +16,30 @@ CAVIS provides a simple way of displaying your cellular automaton. It comes in t
 * Reset view with R.
 * Control zoom with LShift & Space.
 * Control steps per second up with Up & Down arrows.
+* Show/Hide the grid with G.
 
 # Use cases:
 
 ### [Langton's Ant](https://github.com/Rapatas/langtons_ant_sfml)
 
-[![Preview](https://i.imgur.com/ScZSJzd.png "Langtons Ant")](https://github.com/Rapatas/langtons_ant_sfml)
+[![Preview](https://i.imgur.com/348YuU3.gif "3 ants on a torus")](https://github.com/Rapatas/langtons_ant_sfml)
 
 ### [Predator & Prey](https://github.com/Rapatas/predator_and_prey_sfml)
 
-[![Preview](https://i.imgur.com/GTNNQHa.png "Preditor & Prey")](https://github.com/Rapatas/predator_and_prey_sfml)
+[![Preview](https://i.imgur.com/LzmDeJM.gif "Preditor & Prey")](https://github.com/Rapatas/predator_and_prey_sfml)
 
 # Installation
+
 ## Dependencies
 CAVIS is based on [SFML (Simple & Fast Multimedia Library)](https://www.sfml-dev.org/index.php). Follow SFML's documentation to install it. 
 
-For Ubuntu just ```apt install libsfml-dev```
+For Ubuntu simply ```apt install libsfml-dev```
 
 ## CAVIS (Linux)
 ```bash
 git clone https://github.com/Rapatas/CAVIS.git
-cd CAVIS
-mkdir build
-cd build
+mkdir CAVIS/build
+cd CAVIS/build
 cmake ..
 make install # As root
 ```
@@ -46,7 +47,6 @@ make install # As root
 # Usage
 - Implement a cellular automaton using the provided interface ([cellular_automaton.h](include/cellular_automaton.h)).
 - Pass it as a std::unique_ptr to the Cavis or Window constructor.
-- Call .run()
 
 ```c++
 #include <CAVIS/window.h>
