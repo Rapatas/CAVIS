@@ -42,7 +42,7 @@ set(
 
 add_library(
 	${PROJECT_NAME}
-	STATIC
+	SHARED
 	${${PROJECT_NAME}_src}
 )
 
@@ -94,7 +94,7 @@ install(
 install(
 	TARGETS ${PROJECT_NAME}
 	EXPORT  ${PROJECT_NAME}Targets
-	ARCHIVE DESTINATION lib COMPONENT Development
+	LIBRARY DESTINATION lib COMPONENT Development
 )
 
 install(
@@ -103,4 +103,5 @@ install(
 	NAMESPACE   ${PROJECT_NAME}::
 	DESTINATION ${destination}
 )
+
 # }}}
